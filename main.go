@@ -55,7 +55,6 @@ func getResumeByID(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
-
 	json.NewEncoder(w).Encode(&Resume{})
 }
 
