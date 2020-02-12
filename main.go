@@ -42,7 +42,6 @@ func main() {
 func getResumes(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(allResumes)
-
 }
 
 func getResumeByID(w http.ResponseWriter, r *http.Request) {
@@ -63,7 +62,6 @@ func getResumeByID(w http.ResponseWriter, r *http.Request) {
 func getResumeByName(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	name := mux.Vars(r)["name"]
-
 	var resumes []Resume
 
 	// loop through resumes and find with name
@@ -72,7 +70,6 @@ func getResumeByName(w http.ResponseWriter, r *http.Request) {
 			resumes = append(resumes, resume)
 		}
 	}
-
 	json.NewEncoder(w).Encode(resumes)
 }
 
@@ -80,6 +77,8 @@ func postResume(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	var resume Resume
 	_ = json.NewDecoder(r.Body).Decode(&resume)
+
+	// Not the best way of generating ID
 	resume.ID = strconv.Itoa(rand.Intn(10000000))
 
 	allResumes = append(allResumes, resume)
